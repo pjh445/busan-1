@@ -11,6 +11,7 @@
         th,td {padding:5px; text-align: center;}
         th {padding:8px; background:#ddd; font-size:1.1rem;}
         .addr {text-align: left;}
+        .time {width:12%;}
         b {
             color: orange;
         }
@@ -51,9 +52,9 @@
                             tr.innerHTML = `
                                 <td>${ i.shelter_name }</td>
                                 <td class='addr'>${ i.road_address }</td>
-                                <td>${ i.oper_time_weekdays }</td>
-                                <td>${ i.oper_time_weekend }</td>
-                                <td>${ i.oper_time_holidays }</td>
+                                <td class='time'>${ i.oper_time_weekdays }</td>
+                                <td class='time'>${ i.oper_time_weekend }</td>
+                                <td class='time'>${ i.oper_time_holidays }</td>
                                 <td>${ i.basic_date }</td>
                             `;
                             table.appendChild(tr);
