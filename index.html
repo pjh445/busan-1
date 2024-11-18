@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 데이터 출력</title>
+    <style>
+        h1 {width:1000px; text-align: center; margin:30px auto;}
+        table#result {width:1000px; margin:auto;}
+        table,th,td {border:1px solid black; border-collapse: collapse;}
+        th,td {padding:5px; text-align: center;}
+        th {padding:8px; background:#ddd; font-size:1.1rem;}
+        .addr {text-align: left;}
+        b {
+            color: orange;
+        }
+        i {
+            color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>API 데이터 - 부산지역 미세먼지 쉼터 목록</h1>
+    <table id="result">
+        <tr>
+            <th>쉼터이름</th>
+            <th>쉼터주소</th>
+            <th>평일</th>
+            <th>주말</th>
+            <th>공휴일</th>
+            <th>운영기준일</th>
+        </tr>
+    </table>
+
+    <script>
+        // DOM이 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('result');  // 결과를 출력할 div 요소
+            
+            // 데이터를 가져오는 함수
+            function fetchData() {
+                fetch('https://apis.data.go.kr/6260000/BusanDustShelterService/getTblDustShelter?serviceKey=u9ids4VxsKVpFzEzkWWsO1MZBY2L%2Fdoo0TLquOwRRTw6Ahbm5Mim42P%2BXvt3Fhd6wm8OHhTvuGWHsRgfNyvT5A%3D%3D&pageNo=1&numOfRows=10&resultType=JSON')  // API 요청
+                    .then(response => response.json())  // JSON 형식으로 응답을 변환
+                    .then(x => {
+                        const y = x.response.body.items.item;
+                        // 데이터를 성공적으로 받았을 때 화면에 출력
+                        y.forEach( i  => {
+                            //각 항목에 새로운 <tr> 생성
+                            const tr = document.createElement('tr');
+
+                            tr.innerHTML = `
+                                <td>${ i.shelter_name }</td>
+                                <td class='addr'>${ i.road_address }</td>
+                                <td>${ i.oper_time_weekdays }</td>
+                                <td>${ i.oper_time_weekend }</td>
+                                <td>${ i.oper_time_holidays }</td>
+                                <td>${ i.basic_date }</td>
+                            `;
+                            table.appendChild(tr);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('데이터 가져오기 오류:', error);
+                        tr.innerHTML = '데이터를 가져오는 데 오류가 발생했습니다.';
+                    });
+            }
+
+            // 데이터 가져오기 함수 호출
+            fetchData();
+        });
+    </script>
+</body>
+</html>
