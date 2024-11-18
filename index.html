@@ -39,7 +39,7 @@
             
             // 데이터를 가져오는 함수
             function fetchData() {
-                fetch('https://apis.data.go.kr/6260000/BusanDustShelterService/getTblDustShelter?serviceKey=u9ids4VxsKVpFzEzkWWsO1MZBY2L%2Fdoo0TLquOwRRTw6Ahbm5Mim42P%2BXvt3Fhd6wm8OHhTvuGWHsRgfNyvT5A%3D%3D&pageNo=1&numOfRows=10&resultType=JSON')  // API 요청
+                fetch('https://apis.data.go.kr/6260000/BusanDustShelterService/getTblDustShelter?serviceKey=u9ids4VxsKVpFzEzkWWsO1MZBY2L%2Fdoo0TLquOwRRTw6Ahbm5Mim42P%2BXvt3Fhd6wm8OHhTvuGWHsRgfNyvT5A%3D%3D&pageNo=1&numOfRows=30&resultType=JSON')  // API 요청
                     .then(response => response.json())  // JSON 형식으로 응답을 변환
                     .then(x => {
                         const y = x.response.body.items.item;
